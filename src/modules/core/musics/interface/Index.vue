@@ -32,6 +32,10 @@
             v-model="userdata.search.album"
             :label="t('inputs.filter_album')"
           />
+          <Checkbox
+            v-model="userdata.search.track"
+            :label="t('inputs.filter_track')"
+          />
         </div>
         <v-divider vertical />
         <div :class="classform.group_item" style="flex-basis: 200px">
@@ -54,6 +58,7 @@
         name: search_name,
         lyric: search_lyric,
         albums_names: search_album,
+        track: search_track,
       }"
       :filter="{ has_instrumental_music: filter_instrumental_music }"
       :scroll="scroll"
@@ -184,12 +189,21 @@ const search_album = computed(() => {
   return userdata.value.search.album;
 });
 
+const search_track = computed(() => {
+  return userdata.value.search.track;
+});
+
 const filter_instrumental_music = computed(() => {
   return userdata.value.filter.instrumental_music;
 });
 
 const disabled = computed(() => {
-  return !search_name.value && !search_lyric.value && !search_album.value;
+  return (
+    !search_name.value &&
+    !search_lyric.value &&
+    !search_album.value &&
+    !search_track.value
+  );
 });
 
 const classform = computed(() => ({
