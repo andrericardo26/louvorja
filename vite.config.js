@@ -76,6 +76,9 @@ export default ({ mode }) => {
         "@": path.resolve(__dirname, "src"),
       },
     },
+    server: {
+      port: 5002,
+    },
     /* remove the need to specify .vue files https://vitejs.dev/config/#resolve-extensions
   resolve: {
     extensions: [
