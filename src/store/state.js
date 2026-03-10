@@ -55,6 +55,7 @@ export default {
           name: true,
           lyric: false,
           album: false,
+          track: false,
         },
         filter: {
           instrumental_music: false,

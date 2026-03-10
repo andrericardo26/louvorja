@@ -19,7 +19,7 @@
             :disabled-hint="t('inputs.search_disabled')"
           />
         </div>
-        <div :class="classform.group_item" style="flex-basis: 250px">
+        <div :class="classform.group_item" style="flex-basis: 350px">
           <Checkbox
             v-model="userdata.search.name"
             :label="t('inputs.filter_name')"
