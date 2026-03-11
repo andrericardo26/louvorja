@@ -25,14 +25,27 @@ export default {
         "/api/open-song?id=" +
         params.id_music +
         "&tag=" +
-        tag;
+        tag +
+        "&token=" +
+        $userdata.get("remote.token");
 
       $alert.info("modules.media.alerts.open_remote");
       try {
-        await fetch(url, {
+        const response = await fetch(url, {
           method: "GET",
           mode: "cors",
         });
+
+        const ret = await response.json();
+        if (ret.status != "ok") {
+          $alert.error({
+            text:
+              ret.code == "INVALID_TOKEN"
+                ? "modules.remote_control.messages.invalid_token"
+                : "modules.remote_control.messages.error",
+            error: ret.code,
+          });
+        }
       } catch (error) {
         $alert.error({
           text: "modules.media.alerts.open_remote_error",

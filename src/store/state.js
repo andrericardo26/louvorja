@@ -52,6 +52,7 @@ export default {
     remote: {
       is_connected: false,
       url: "",
+      token: "",
     },
     modules: {
       musics: {

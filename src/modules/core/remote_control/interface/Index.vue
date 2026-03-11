@@ -12,7 +12,18 @@
           density="compact"
           variant="outlined"
           prepend-icon="mdi-ip-network"
-          hint="Obtenha o IP através da opção 'Transmitir' do programa"
+          :hint="t('messages.get_ip')"
+          persistent-hint
+          :loading="loading ? 'warning' : null"
+        />
+        <v-text-field
+          v-model="token"
+          :disabled="loading || is_connected"
+          :label="t('labels.token')"
+          class="mt-3"
+          density="compact"
+          variant="outlined"
+          prepend-icon="mdi-code-braces"
           persistent-hint
           :loading="loading ? 'warning' : null"
         />
@@ -54,6 +65,7 @@ const t = (key) => {
 
 const { proxy } = getCurrentInstance();
 const url = ref("");
+const token = ref("");
 const loading = ref(false);
 
 const is_connected = computed(() => {
@@ -92,7 +104,7 @@ async function testUrl(url) {
   }
 
   try {
-    const response = await fetch(url + "/api/ping", {
+    const response = await fetch(url + "/api/ping?token=" + token.value, {
       method: "GET",
       mode: "cors",
     });
@@ -105,7 +117,19 @@ async function testUrl(url) {
       };
     }
 
-    const data = await response.json(); // ou .json() se souber que retorna JSON
+    const data = await response.json();
+
+    if (data.status != "ok") {
+      return {
+        message:
+          data.code == "INVALID_TOKEN"
+            ? "modules.remote_control.messages.invalid_token"
+            : "modules.remote_control.messages.error",
+        error: data.code,
+        status: false,
+      };
+    }
+    console.log(data);
 
     return {
       message: "modules.remote_control.messages.success",
@@ -152,6 +176,7 @@ async function test() {
 
 async function connect() {
   proxy.$userdata.set("remote.url", getUrl(url.value));
+  proxy.$userdata.set("remote.token", token.value);
 
   if (!(await test())) {
     return;
@@ -170,5 +195,6 @@ function disonnect() {
 
 onMounted(() => {
   url.value = proxy.$userdata.get("remote.url");
+  token.value = proxy.$userdata.get("remote.token");
 });
 </script>
