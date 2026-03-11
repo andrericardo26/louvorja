@@ -10,7 +10,7 @@
         "invalid_token": "Token inválido",
         "error": "Error al acceder al enlace"
     },
-    "info_module": "Ejecuta las canciones de su aplicación de forma remota. Para que este recurso funcione, este sitio debe estar ejecutándose dentro de la misma red del programa. Es necesario que el programa esté al menos en la versión 26.2.",
+    "info_module": "Ejecuta las canciones de su aplicación de forma remota. Para que este recurso funcione, este sitio debe estar ejecutándose dentro de la misma red del programa. Es necesario que el programa esté al menos en la versión 26.3.",
     "labels": {
         "ip": "IP de la Conexión",
         "test_connection": "Probar Conexión",
