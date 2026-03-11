@@ -1,7 +1,9 @@
 {
     "alerts": {
         "not_loaded": "Ocorreu um erro ao carregar este áudio!",
-        "close": "Deseja fechar este slide?"
+        "close": "Deseja fechar este slide?",
+        "open_remote": "A música está sendo aberta em sua aplicação desktop.",
+        "open_remote_error": "Ocorreu um erro ao executar sua música em sua aplicação desktop. Verifique se a transmissão está ativa, ou desative a transmissão para executar neste local."
     },
     "general": {
         "sung": "Cantado",

@@ -49,6 +49,10 @@ export default {
     theme: "",
     language: "",
     layout: "apps",
+    remote: {
+      is_connected: false,
+      url: "",
+    },
     modules: {
       musics: {
         search: {

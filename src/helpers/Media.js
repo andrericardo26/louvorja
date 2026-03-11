@@ -12,7 +12,35 @@ export default {
     if (typeof params != "object") {
       params = { id_music: params };
     }
+
     $dev.write("open media", params);
+
+    // Conexão remota está ativada? Se sim, abre do programa desktop
+    if ($userdata.get("remote.is_connected")) {
+      const tag =
+        params.mode == "audio" ? 1 : params.mode == "instrumental" ? 2 : 3;
+
+      const url =
+        $userdata.get("remote.url") +
+        "/api/open-song?id=" +
+        params.id_music +
+        "&tag=" +
+        tag;
+
+      $alert.info("modules.media.alerts.open_remote");
+      try {
+        await fetch(url, {
+          method: "GET",
+          mode: "cors",
+        });
+      } catch (error) {
+        $alert.error({
+          text: "modules.media.alerts.open_remote_error",
+          error: error,
+        });
+      }
+      return;
+    }
 
     this.stopAudio();
     this.clearVariables();
